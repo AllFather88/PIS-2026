@@ -1,0 +1,40 @@
+@startuml
+actor User
+participant "Web UI" as UI
+participant "Booking API" as API
+database "Database" as DB
+participant "Payment Service" as Payment
+participant "Email Service" as Email
+
+User -> UI: Открыть приложение и выбрать площадку
+UI -> API: GET /api/schedule
+activate API
+API -> DB: Запросить доступные слоты
+DB --> API: Список свободных слотов
+API --> UI: Отобразить расписание
+deactivate API
+
+User -> UI: Выбрать слот и нажать "Забронировать"
+UI -> API: POST /api/bookings
+activate API
+
+API -> DB: Создать бронь (статус: PENDING)
+DB --> API: booking_id
+
+API -> Payment: Charge(booking_id, amount)
+activate Payment
+Payment --> API: payment_id, status: SUCCESS
+deactivate Payment
+
+API -> DB: Обновить статус брони (CONFIRMED)
+
+API -> Email: SendBookingConfirmation(booking_id)
+activate Email
+Email --> API: OK
+deactivate Email
+
+API --> UI: 201 Created, booking_id
+deactivate API
+
+UI --> User: Показать подтверждение брони
+@enduml
