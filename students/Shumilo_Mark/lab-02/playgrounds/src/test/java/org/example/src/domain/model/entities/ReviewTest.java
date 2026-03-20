@@ -1,6 +1,7 @@
 package org.example.src.domain.model.entities;
 
 
+import org.example.src.domain.model.aggregates.Review;
 import org.example.src.domain.model.events.ReviewEditedEvent;
 import org.example.src.domain.model.value_objects.ReviewText;
 import org.junit.Test;

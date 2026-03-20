@@ -1,4 +1,4 @@
-package org.example.src.domain.model.entities;
+package org.example.src.domain.model.aggregates;
 
 
 import java.util.Objects;
@@ -12,7 +12,7 @@ import org.example.src.domain.model.value_objects.Location;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 // класс доменной сущности "площадка"
 public class Court {
 

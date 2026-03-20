@@ -1,6 +1,7 @@
 package org.example.src.domain.model.entities;
 
 
+import org.example.src.domain.model.aggregates.Court;
 import org.example.src.domain.model.events.CourtDeactivatedEvent;
 import org.example.src.domain.model.events.CourtRenamedEvent;
 import org.example.src.domain.model.value_objects.CourtName;

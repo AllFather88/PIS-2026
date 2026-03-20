@@ -1,5 +1,6 @@
 package org.example.src.domain.model.entities;
 
+import org.example.src.domain.model.aggregates.Booking;
 import org.example.src.domain.model.events.*;
 import org.example.src.domain.model.value_objects.TimeSlot;
 import org.junit.Test;

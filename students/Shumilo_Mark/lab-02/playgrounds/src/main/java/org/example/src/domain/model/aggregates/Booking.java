@@ -1,4 +1,4 @@
-package org.example.src.domain.model.entities;
+package org.example.src.domain.model.aggregates;
 
 import org.example.src.domain.model.events.*;
 import org.example.src.domain.model.value_objects.TimeSlot;

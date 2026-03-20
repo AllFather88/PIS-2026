@@ -1,7 +1,7 @@
 package org.example.src.infrastructure.adapter.in;
 
 import org.example.src.application.port.in.SearchCourtsUseCase;
-import org.example.src.domain.model.entities.Court;
+import org.example.src.domain.model.aggregates.Court;
 
 import java.util.List;
 

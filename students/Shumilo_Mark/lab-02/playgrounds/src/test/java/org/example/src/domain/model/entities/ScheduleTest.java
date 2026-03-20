@@ -1,6 +1,7 @@
 package org.example.src.domain.model.entities;
 
 
+import org.example.src.domain.model.aggregates.Schedule;
 import org.example.src.domain.model.events.ScheduleLockedEvent;
 import org.example.src.domain.model.events.ScheduleUnlockedEvent;
 import org.example.src.domain.model.events.TimeSlotAddedEvent;
