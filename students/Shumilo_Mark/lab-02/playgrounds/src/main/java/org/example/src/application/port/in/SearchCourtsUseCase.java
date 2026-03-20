@@ -1,7 +1,6 @@
 package org.example.src.application.port.in;
 
-import org.example.src.domain.model.Court;
-import org.example.src.domain.model.Review;
+import org.example.src.domain.model.entities.Court;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package org.example.src.application.service;
 
 import org.example.src.application.port.DTO.CreateBookingCommand;
 import org.example.src.application.port.in.CreateBookingUseCase;
-import org.example.src.domain.model.Booking;
+import org.example.src.domain.model.entities.Booking;
 
 public class BookingService implements CreateBookingUseCase {
   @Override

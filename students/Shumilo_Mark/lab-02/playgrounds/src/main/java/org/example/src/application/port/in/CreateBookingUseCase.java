@@ -3,7 +3,7 @@ package org.example.src.application.port.in;
 //интерфейс для создания броней
 
 import org.example.src.application.port.DTO.CreateBookingCommand;
-import org.example.src.domain.model.Booking;
+import org.example.src.domain.model.entities.Booking;
 
 
 public interface CreateBookingUseCase {
