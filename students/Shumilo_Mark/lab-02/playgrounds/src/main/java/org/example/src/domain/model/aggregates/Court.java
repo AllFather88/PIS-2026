@@ -4,6 +4,7 @@ package org.example.src.domain.model.aggregates;
 import java.util.Objects;
 
 
+import lombok.Getter;
 import org.example.src.domain.model.events.CourtDeactivatedEvent;
 import org.example.src.domain.model.events.CourtRenamedEvent;
 import org.example.src.domain.model.value_objects.CourtName;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // класс доменной сущности "площадка"
+@Getter
 public class Court {
 
   private final Long id;
@@ -64,6 +66,8 @@ public class Court {
   public CourtName getName() {
     return name;
   }
+
+
 }
 
 

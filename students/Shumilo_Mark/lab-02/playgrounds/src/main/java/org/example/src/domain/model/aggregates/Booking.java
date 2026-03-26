@@ -1,5 +1,7 @@
 package org.example.src.domain.model.aggregates;
 
+import lombok.Getter;
+import org.example.src.application.command.CreateBookingCommand;
 import org.example.src.domain.model.events.*;
 import org.example.src.domain.model.value_objects.TimeSlot;
 import java.time.LocalDateTime;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 // класс доменной сущности "бронь"
+@Getter
 public class Booking {
 
   private final Long id;
@@ -87,5 +90,7 @@ public class Booking {
   public long getUserId() {
     return userId;
   }
+
+
 }
 

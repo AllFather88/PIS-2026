@@ -1,6 +1,8 @@
 package org.example.src.domain.model.value_objects;
 
+
 import java.time.LocalDateTime;
+
 
 public record TimeSlot(LocalDateTime start, LocalDateTime end) {
 
@@ -14,4 +16,5 @@ public record TimeSlot(LocalDateTime start, LocalDateTime end) {
   public boolean overlaps(TimeSlot other) {
     return start.isBefore(other.end) && other.start.isBefore(end);
   }
+
 }

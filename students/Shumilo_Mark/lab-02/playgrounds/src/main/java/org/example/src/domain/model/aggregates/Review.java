@@ -1,5 +1,6 @@
 package org.example.src.domain.model.aggregates;
 
+import lombok.Getter;
 import org.example.src.domain.model.value_objects.Rating;
 import org.example.src.domain.model.value_objects.ReviewText;
 
@@ -11,10 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 // класс доменной сущности "отзыв"
+@Getter
 public class Review {
 
   private final Long id;
-  private final Long bookingId;
+  private final Long courtId;
   private final Long userId;
   private final Rating rating;
 
@@ -27,14 +29,14 @@ public class Review {
 
   private final List<Object> events = new ArrayList<>();
 
-  public Review(Long id, Long bookingId, Long userId, int rating, ReviewText text) {
+  public Review(Long id, Long cId, Long userId, int rating, ReviewText text) {
     if (id == null) throw new IllegalArgumentException("Review ID cannot be null");
-    if (bookingId == null) throw new IllegalArgumentException("Booking ID cannot be null");
+    if (cId == null) throw new IllegalArgumentException("Booking ID cannot be null");
     if (userId == null) throw new IllegalArgumentException("User ID cannot be null");
     if (rating < 1 || rating > 5) throw new IllegalArgumentException("Rating must be 1–5");
 
     this.id = id;
-    this.bookingId = bookingId;
+    this.courtId = cId;
     this.userId = userId;
     this.rating = new Rating(rating);
     this.text = text;
@@ -85,5 +87,8 @@ public class Review {
   public String getText() {
     return text.text();
   }
+
+
+
 }
 

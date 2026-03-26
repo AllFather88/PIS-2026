@@ -8,6 +8,7 @@ import java.util.List;
 import org.example.src.domain.model.events.TimeSlotAddedEvent;
 
 // класс доменной сущности "расписание"
+
 public class Schedule {
 
   private final Long courtId;
@@ -20,7 +21,9 @@ public class Schedule {
     if (courtId == null) throw new IllegalArgumentException("Court ID cannot be null");
     this.courtId = courtId;
   }
-
+  public void setAvailableSlots(List<TimeSlot> a){
+    this.availableSlots.addAll(a);
+  }
   public void addSlot(TimeSlot slot) {
     if (locked)
       throw new IllegalStateException("Schedule is locked and cannot be modified");
