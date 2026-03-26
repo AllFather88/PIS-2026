@@ -73,5 +73,17 @@ public class Review {
   public int hashCode() {
     return Objects.hash(id);
   }
+
+  public long getId() {
+    return id;
+  }
+
+  public int getRating() {
+    return rating.value();
+  }
+
+  public String getText() {
+    return text.text();
+  }
 }
 

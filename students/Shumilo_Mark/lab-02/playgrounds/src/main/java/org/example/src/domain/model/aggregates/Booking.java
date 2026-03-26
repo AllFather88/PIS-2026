@@ -75,5 +75,17 @@ public class Booking {
   public int hashCode() {
     return Objects.hash(id);
   }
+
+  public long getId() {
+    return id;
+  }
+
+  public long getCourtId() {
+    return courtId;
+  }
+
+  public long getUserId() {
+    return userId;
+  }
 }
 

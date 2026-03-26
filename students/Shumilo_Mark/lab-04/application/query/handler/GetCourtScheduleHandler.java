@@ -1,0 +1,21 @@
+package org.example.src.application.query.handler;
+
+
+import org.example.src.application.query.GetCourtScheduleQuery;
+import org.example.src.application.port.out.ScheduleRepository;
+import org.example.src.domain.model.aggregates.Schedule;
+
+
+public class GetCourtScheduleHandler {
+
+  private final ScheduleRepository scheduleRepository;
+
+  public GetCourtScheduleHandler(ScheduleRepository scheduleRepository) {
+    this.scheduleRepository = scheduleRepository;
+  }
+
+  public Schedule handle(GetCourtScheduleQuery query) {
+    return scheduleRepository.findByCourtId(query.getCourtId());
+  }
+}
+

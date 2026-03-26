@@ -62,5 +62,9 @@ public class Schedule {
   public List<Object> getEvents() {
     return List.copyOf(events);
   }
+
+    public Long getCourtId() {
+      return courtId;
+    }
 }
 
