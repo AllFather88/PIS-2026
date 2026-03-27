@@ -1,8 +1,7 @@
 package org.example.src.infrastructure.config;
 
 
-import com.rabbitmq.client.ConnectionFactory;
-import org.example.src.application.command.handler.CreateBookingHandler;
+import org.example.src.application.command.handler.CreateOrGetBookingHandler;
 import org.example.src.application.command.handler.CreateReviewHandler;
 import org.example.src.application.query.handler.GetCourtScheduleHandler;
 import org.example.src.application.query.handler.SearchCourtsHandler;
@@ -17,13 +16,9 @@ import org.example.src.infrastructure.adapter.out.repository.ReviewReadJpaReposi
 import org.example.src.infrastructure.adapter.out.reviewRepository;
 import org.example.src.infrastructure.adapter.out.scheduleRepository;
 import org.example.src.infrastructure.eventsbus.RabbitMqEventBus;
-import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.converter.MessageConverter;
 
 // класс для описания внедрения зависимостей
 
@@ -50,7 +45,7 @@ public class DependencyInjectionConfig {
     }
     @Bean
     public BookingService getBookingService(){
-        CreateBookingHandler handler = new CreateBookingHandler(bRepository,eventBus);
+        CreateOrGetBookingHandler handler = new CreateOrGetBookingHandler(bRepository,eventBus);
         return new BookingService(handler);
     }
     @Bean

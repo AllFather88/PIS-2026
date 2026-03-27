@@ -15,7 +15,7 @@ public class GetCourtScheduleHandler {
     this.scheduleRepository = scheduleRepository;
   }
 
-  public SheduleReadEntity handle(GetCourtScheduleQuery query) {
+  public Schedule handle(GetCourtScheduleQuery query) {
     return scheduleRepository.findByCourtId(query.getCourtId());
   }
 }

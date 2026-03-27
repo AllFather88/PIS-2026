@@ -13,7 +13,7 @@ public class ScheduleService implements GetCourtScheduleUseCase {
     this.handler = handler;
   }
   @Override
-  public SheduleReadEntity getSchedule(Long courtId) {
+  public Schedule getSchedule(Long courtId) {
       return handler.handle(new GetCourtScheduleQuery(courtId));
   }
 }

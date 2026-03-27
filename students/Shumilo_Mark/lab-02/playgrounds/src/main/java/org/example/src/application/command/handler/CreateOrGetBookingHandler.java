@@ -8,16 +8,21 @@ import org.example.src.application.port.out.BookingRepository;
 
 import org.example.src.domain.model.aggregates.Booking;
 import org.example.src.domain.model.value_objects.TimeSlot;
+import org.example.src.infrastructure.adapter.out.entity.BookingEntity;
 
-public class CreateBookingHandler {
+import java.util.List;
+
+public class CreateOrGetBookingHandler {
 
   private final BookingRepository bookingRepository;
   private final EventBus events;
-  public CreateBookingHandler(BookingRepository bookingRepository,EventBus b) {
+  public CreateOrGetBookingHandler(BookingRepository bookingRepository, EventBus b) {
     this.bookingRepository = bookingRepository;
     this.events = b;
   }
-
+  public List<BookingEntity> getActiveBookings(Long id) {
+    return bookingRepository.getActiveBookings(id);
+  }
   public Booking handle(CreateBookingCommand command) {
 
     TimeSlot slot = new TimeSlot(

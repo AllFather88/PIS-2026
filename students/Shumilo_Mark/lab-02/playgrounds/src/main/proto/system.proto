@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package tennis;
+
+option java_multiple_files = true;
+option java_package = "org.example.grpc";
+option java_outer_classname = "TennisProto";
+
+
+//  BOOKING SERVICE
+service BookingService {
+  rpc CreateBooking(CreateBookingRequest) returns (BookingDto);
+  rpc GetBooking(GetBookingRequest) returns (BookingDto);
+
+  // server-side streaming
+  rpc StreamActiveBookings(StreamActiveBookingsRequest)
+      returns (stream BookingDto);
+}
+
+message CreateBookingRequest {
+  int64 court_id = 1;
+  int64 user_id = 2;
+  string start_time = 3; // ISO-8601
+  string end_time = 4;
+}
+
+message GetBookingRequest {
+  int64 booking_id = 1;
+}
+
+message StreamActiveBookingsRequest {
+  int64 court_id = 1;
+}
+
+message BookingDto {
+  int64 booking_id = 1;
+  int64 court_id = 2;
+  int64 user_id = 3;
+  string start_time = 4;
+  string end_time = 5;
+  string status = 6;
+}
+
+
+
+//  SCHEDULE SERVICE
+service ScheduleService {
+  rpc GetSchedule(GetScheduleRequest) returns (ScheduleResponse);
+}
+
+message GetScheduleRequest {
+  int64 court_id = 1;
+}
+
+message ScheduleResponse {
+  repeated TimeSlot slots = 1;
+}
+
+message TimeSlot {
+  string start = 1;
+  string end = 2;
+  bool available = 3;
+}
+
+
+
+//  REVIEW SERVICE
+service ReviewService {
+  rpc CreateReview(CreateReviewRequest) returns (ReviewDto);
+}
+
+message CreateReviewRequest {
+  int64 court_id = 1;
+  int64 user_id = 2;
+  int32 rating = 3;
+  string text = 4;
+}
+
+message ReviewDto {
+  int64 review_id = 1;
+  int64 court_id = 2;
+  int64 user_id = 3;
+  int32 rating = 4;
+  string text = 5;
+}
+
+
+//  COURT SEARCH SERVICE
+service CourtService {
+  rpc SearchCourts(SearchCourtsRequest) returns (SearchCourtsResponse);
+}
+
+message SearchCourtsRequest {
+  string query = 1;
+}
+
+message SearchCourtsResponse {
+  repeated CourtDto courts = 1;
+}
+
+message CourtDto {
+  int64 court_id = 1;
+  string name = 2;
+  string address = 3;
+}

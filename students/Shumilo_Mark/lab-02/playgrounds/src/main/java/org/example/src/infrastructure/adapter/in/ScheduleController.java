@@ -22,7 +22,7 @@ public class ScheduleController {
   }
 
   @GetMapping("/{courtId}")
-  public SheduleReadEntity getSchedule(@PathVariable Long courtId) {
+  public Schedule getSchedule(@PathVariable Long courtId) {
     return scheduleService.getSchedule(courtId);
   }
 }

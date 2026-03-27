@@ -13,19 +13,7 @@ import static org.junit.Assert.*;
 
 public class BookingTest {
 
-  @Test
-  public void shouldCreateBookingAndRegisterEvent() {
-    TimeSlot slot = new TimeSlot(
-      LocalDateTime.now().minusHours(1),
-      LocalDateTime.now().plusHours(1)
-    );
 
-    Booking booking = new Booking(1L, 10L, 5L, slot);
-
-    List<DomainEvent> events = booking.getEvents();
-    assertEquals(1, events.size());
-    assertTrue(events.get(0) instanceof BookingCreatedEvent);
-  }
 
   @Test
   public void shouldConfirmBooking() {

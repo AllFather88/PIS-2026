@@ -10,7 +10,6 @@ import org.example.src.domain.model.value_objects.TimeSlot;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -21,7 +20,7 @@ public class CreateBookingHandlerTest {
   public void testCreateBooking() {
     BookingRepository repo = mock(BookingRepository.class);
     EventBus b = mock(EventBus.class);
-    CreateBookingHandler handler = new CreateBookingHandler(repo,b);
+    CreateOrGetBookingHandler handler = new CreateOrGetBookingHandler(repo,b);
 
     LocalDateTime start = LocalDateTime.now();
     LocalDateTime end = start.plusHours(1);

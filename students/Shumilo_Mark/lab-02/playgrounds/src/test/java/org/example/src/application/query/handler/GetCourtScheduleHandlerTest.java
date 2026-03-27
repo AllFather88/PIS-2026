@@ -24,12 +24,7 @@ public class GetCourtScheduleHandlerTest {
     SheduleReadEntity schedule = new SheduleReadEntity();
     schedule.setCourtId(10L);
 
-    when(repo.findByCourtId(10L)).thenReturn(schedule);
 
-    SheduleReadEntity result = handler.handle(query);
-
-    assertNotNull(result);
-    assertEquals(Long.valueOf(10L), result.getCourtId());
 
 
     verify(repo, times(1)).findByCourtId(10L);

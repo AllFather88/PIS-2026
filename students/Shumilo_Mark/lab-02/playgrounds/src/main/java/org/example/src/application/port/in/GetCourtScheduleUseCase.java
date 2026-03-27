@@ -6,5 +6,5 @@ import org.example.src.infrastructure.adapter.out.entity.SheduleReadEntity;
 //интерфейс для получения расписания площадки
 public interface GetCourtScheduleUseCase {
   // получает расписание по id площадки
-  SheduleReadEntity getSchedule(Long courtId);
+  Schedule getSchedule(Long courtId);
 }
