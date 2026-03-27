@@ -1,29 +1,29 @@
 package org.example.src.infrastructure.config;
 
-
-import com.rabbitmq.client.ConnectionFactory;
 import org.example.src.application.command.handler.CreateBookingHandler;
 import org.example.src.application.command.handler.CreateReviewHandler;
+import org.example.src.application.port.in.SearchCourtsUseCase;
+import org.example.src.application.port.out.CourtRepository;
+import org.example.src.application.projection.BookingProjection;
+import org.example.src.application.projection.ReviewProjection;
 import org.example.src.application.query.handler.GetCourtScheduleHandler;
 import org.example.src.application.query.handler.SearchCourtsHandler;
 import org.example.src.application.service.BookingService;
 import org.example.src.application.service.CourtService;
 import org.example.src.application.service.ReviewService;
 import org.example.src.application.service.ScheduleService;
+import org.example.src.domain.model.aggregates.Review;
+import org.example.src.infrastructure.adapter.in.CourtController;
 import org.example.src.infrastructure.adapter.out.bookingRepository;
 import org.example.src.infrastructure.adapter.out.courtRepository;
 import org.example.src.infrastructure.adapter.out.repository.BookingReadJpaRepository;
 import org.example.src.infrastructure.adapter.out.repository.ReviewReadJpaRepository;
 import org.example.src.infrastructure.adapter.out.reviewRepository;
 import org.example.src.infrastructure.adapter.out.scheduleRepository;
-import org.example.src.infrastructure.eventsbus.RabbitMqEventBus;
-import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.example.src.infrastructure.eventsbus.SimpleEventBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.converter.MessageConverter;
 
 // класс для описания внедрения зависимостей
 
@@ -31,45 +31,25 @@ import org.springframework.messaging.converter.MessageConverter;
 public class DependencyInjectionConfig {
 
 
-    private final bookingRepository bRepository;
-    private final courtRepository cRepository;
     private final reviewRepository rRepository;
-    private final scheduleRepository sRepository;
-    private final RabbitMqEventBus eventBus;
+
+    private final SimpleEventBus eventBus;
     private final BookingReadJpaRepository br;
     private final ReviewReadJpaRepository rr;
 
-    public DependencyInjectionConfig(@Autowired bookingRepository bRepository, @Autowired courtRepository cRepository, @Autowired reviewRepository rRepository, @Autowired scheduleRepository sRepository, @Autowired RabbitMqEventBus eventBus, @Autowired BookingReadJpaRepository br, @Autowired ReviewReadJpaRepository rr) {
-        this.bRepository = bRepository;
-        this.cRepository = cRepository;
+    public DependencyInjectionConfig( @Autowired courtRepository cRepository, @Autowired reviewRepository rRepository,  @Autowired  SimpleEventBus eventBus,@Autowired BookingReadJpaRepository br,@Autowired ReviewReadJpaRepository rr) {
         this.rRepository = rRepository;
-        this.sRepository = sRepository;
         this.br = br;
         this.rr = rr;
+        eventBus.register(new BookingProjection(br));
+        eventBus.register(new ReviewProjection(rr));
         this.eventBus = eventBus;
     }
-    @Bean
-    public BookingService getBookingService(){
-        CreateBookingHandler handler = new CreateBookingHandler(bRepository,eventBus);
-        return new BookingService(handler);
-    }
-    @Bean
-    public CourtService getCourtService(){
-        SearchCourtsHandler handler = new SearchCourtsHandler(cRepository);
-        return new CourtService(handler);
-    }
+
     @Bean
     public ReviewService getReviewService(){
         CreateReviewHandler handler = new CreateReviewHandler(rRepository,eventBus);
         return new ReviewService(handler);
     }
-    @Bean
-    public ScheduleService getScheduleService(){
-        GetCourtScheduleHandler handler = new GetCourtScheduleHandler(sRepository);
-        return new ScheduleService(handler);
-    }
-
-
-
 
 }
