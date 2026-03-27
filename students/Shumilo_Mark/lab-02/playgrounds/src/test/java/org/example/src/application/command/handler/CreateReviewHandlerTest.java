@@ -3,6 +3,7 @@ package org.example.src.application.command.handler;
 
 
 import org.example.src.application.command.CreateReviewCommand;
+import org.example.src.application.eventbus.EventBus;
 import org.example.src.application.port.out.ReviewRepository;
 import org.example.src.domain.model.aggregates.Review;
 import org.example.src.domain.model.value_objects.ReviewText;
@@ -18,8 +19,8 @@ public class CreateReviewHandlerTest {
   @Test
   public void testCreateReview() {
     ReviewRepository repo = mock(ReviewRepository.class);
-
-    CreateReviewHandler handler = new CreateReviewHandler(repo);
+    EventBus b = mock(EventBus.class);
+    CreateReviewHandler handler = new CreateReviewHandler(repo,b);
 
     CreateReviewCommand command = new CreateReviewCommand(
       5L, 7L, 4, "Nice court"

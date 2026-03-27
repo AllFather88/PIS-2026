@@ -4,6 +4,7 @@ package org.example.src.application.query.handler;
 import org.example.src.application.port.out.ScheduleRepository;
 import org.example.src.application.query.GetCourtScheduleQuery;
 import org.example.src.domain.model.aggregates.Schedule;
+import org.example.src.infrastructure.adapter.out.entity.SheduleReadEntity;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -20,15 +21,16 @@ public class GetCourtScheduleHandlerTest {
 
     GetCourtScheduleQuery query = new GetCourtScheduleQuery(10L);
 
-    Schedule schedule = new Schedule(10L);
+    SheduleReadEntity schedule = new SheduleReadEntity();
+    schedule.setCourtId(10L);
 
     when(repo.findByCourtId(10L)).thenReturn(schedule);
 
-    Schedule result = handler.handle(query);
+    SheduleReadEntity result = handler.handle(query);
 
     assertNotNull(result);
     assertEquals(Long.valueOf(10L), result.getCourtId());
-    assertTrue(result.getSlots().isEmpty());
+
 
     verify(repo, times(1)).findByCourtId(10L);
   }

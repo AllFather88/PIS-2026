@@ -7,6 +7,7 @@ import org.example.src.application.query.SearchCourtsQuery;
 import org.example.src.domain.model.aggregates.Court;
 import org.example.src.domain.model.value_objects.CourtName;
 import org.example.src.domain.model.value_objects.Location;
+import org.example.src.infrastructure.adapter.out.entity.CourtReadEntity;
 import org.junit.Test;
 
 import java.util.List;
@@ -23,19 +24,19 @@ public class SearchCourtsHandlerTest {
 
     SearchCourtsQuery query = new SearchCourtsQuery("tennis");
 
-    List<Court> courts = List.of(
-      new Court(1L, new CourtName("Court A"),new Location(1,1)),
-      new Court(2L, new CourtName("Court B"),new Location(1,1))
+    List<CourtReadEntity> courts = List.of(
+      new CourtReadEntity(),
+      new CourtReadEntity()
     );
 
     when(repo.searchByName("tennis")).thenReturn(courts);
 
-    List<Court> result = handler.handle(query);
+    List<CourtReadEntity> result = handler.handle(query);
 
     assertNotNull(result);
     assertEquals(2, result.size());
-    assertEquals("Court A", result.get(0).getName().value());
-    assertEquals("Court B", result.get(1).getName().value());
+    assertEquals("Court A", result.get(0).getName());
+    assertEquals("Court B", result.get(1).getName());
 
     verify(repo, times(1)).searchByName("tennis");
   }
